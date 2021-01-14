@@ -1,0 +1,13 @@
+curl -H 'X-Test:hello' https://httpbin.org/headers
+
+curl -X POST -d "{\"name\": \"hoge\"}" -H 'Content-Type:application/json' https://httpbin.org/post
+
+curl -X POST -d '{userA: {name: "hoge", age: 29}}' -H 'Content-Type:application/json' https://httpbin.org/post
+
+curl -X POST -d "{\"name\": \"hoge\"}" -H 'application/x-www-form-urlencoded' https://httpbin.org/post
+
+curl localhost:8080 -H "Content-Type: application/json"
+
+curl localhost:8080 -d '{"name": "hoge"}' -H "Content-Type: application/json"
+
+curl localhost:8080 -d '{"name": "hoge"}'
