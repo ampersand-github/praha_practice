@@ -5,5 +5,12 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+// 「/about」のルーティング設定
+router.get("/about", (req, res) => {
+  res.status(200).send("aboutページ");
+});
 
+router.get('/hw', (req, res) => {
+  res.render('helloWorld', { title: 'Express' });
+});
 module.exports = router;
