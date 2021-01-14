@@ -7,3 +7,5 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+// git remote add origin git@github.com:ampersand-github/praha_practice
+// git push -u origin mian
