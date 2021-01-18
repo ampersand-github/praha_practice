@@ -4,18 +4,18 @@ var router = express.Router();
 // '課題6 CORSについて理解する'
 // http://localhost:3000/6
 router.get('/', function(req, res, next) {
-    res.render('index', { title: '課題6 CORSについて理解する' });
+    res.render('cors', { title: '課題6 CORSについて理解する'});
 });
 
-router.get('/1', function(req, res, next) {
+router.post('/1', (req, res) => {
     console.log('/test1');
     console.log(req.body);
     const obj = {
         message: 'Hello from server!'
     };
-    res.status(200).json(obj);
-});
-module.exports = router;
+    res.send(obj);
+    res.status(200);
 
-// node ./anotherServer/5/app.js
-//
+});
+
+module.exports = router;

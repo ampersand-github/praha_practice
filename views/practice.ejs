@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p><%= description %></p>
+    <p><a href="http://localhost:3000/practice/index">indexページへのアクセス</a></p>
+    <p><a href="http://localhost:3000/practice/index2">index2ページへのアクセス</a></p>
+    <form method="POST" action="http://localhost:3000/practice/post1">
+      <label>入力：</label><br />
+      <input type="text" name="data" /><br />
+      <input type="submit" value="送信" />
+    </form>
+  </body>
+</html>

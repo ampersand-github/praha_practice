@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<section>
+    <h1>課題3（実装）</h1>
+    <p>この課題では、CORSを説明するためのモックを作成していただきます</p>
+    <h1>仕様</h1>
+    <p>特定のオリジンからのPOSTリクエストのみ許可</p>
+    <p>それ以外のオリジンからPOSTリクエストを受けた時は、CORS制約によりアクセスが制限</p>
+    <p>「Simple request」の時はpreflightが行われないこと</p>
+    <p>「Simple request」に該当しないときはpreflightが行われることを証明してください</p>
+    <h1>技術的な仕様</h1>
+    <p>サーバはnode.jsとexpressで作成してください（以降の課題でも使うため）</p>
+    <h1>課題4（成果物に関する質問）</h1>
+    <p>作成した成果物に、試しにCURLで、「Simple request」に該当しないPOSTリクエストを送信してみましょう</p>
+    <p>果たしてCURLからのリクエストを受けた時、CORS制約は適用されるでしょうか？</p>
+    <p>その理由を説明してください</p>
+</section>
+</body>
+<script>
+    let xhr = new XMLHttpRequest();
+    // /OK -> cors()の設定をしてあり、http://localhost:3000からのアクセスを許可している。
+    xhr.open( 'POST', 'http://localhost:3006/OK', false );
+    xhr.onload = function () {
+        console.log(xhr.responseText);
+    };
+    // /NG -> cors()の設定をしないので、アクセスが許可されない。
+    //xhr.open( 'POST', 'http://localhost:3006/NG', false );
+    // POST 送信の場合は Content-Type は固定.
+    xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+    //xhr.setRequestHeader( 'Content-Type', 'application/xml' );
+
+    //
+    xhr.send( 'hoge=piyo&moge=fuga' );
+    xhr.abort(); // 再利用する際にも abort() しないと再利用できないらしい.
+</script>
+</html>
