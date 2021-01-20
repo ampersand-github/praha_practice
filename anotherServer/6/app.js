@@ -10,13 +10,16 @@ const corsOptions = {
 }
 
 app.post('/OK', cors(corsOptions),function(req, res, next) {
-    console.log('http://localhost:3006へアクセス')
+    console.log('http://localhost:3006/okへアクセス')
+    console.log(req.headers);
     res.send('aaaa')
     res.status(200).end();
 });
 
 app.post('/NG',function(req, res, next) {
-    console.log('http://localhost:3006へアクセス')
+    console.log('http://localhost:3006/ngへアクセス')
+    console.log(req.headers);
+    res.status(200).end();
 });
 
 

@@ -20,22 +20,42 @@
     <p>果たしてCURLからのリクエストを受けた時、CORS制約は適用されるでしょうか？</p>
     <p>その理由を説明してください</p>
 </section>
+<section>
+    <form action="http://localhost:3006/OK" method="post" target="_blank">
+    <button type="submit" onclick="okClickEvent()">OK</button>
+    </form>
+    <form action="http://localhost:3006/NG" method="post" target="_blank">
+        <button type="submit" onclick="ngClickEvent()">NG</button>
+    </form>
+</section>
 </body>
 <script>
-    let xhr = new XMLHttpRequest();
-    // /OK -> cors()の設定をしてあり、http://localhost:3000からのアクセスを許可している。
-    xhr.open( 'POST', 'http://localhost:3006/OK', false );
-    xhr.onload = function () {
-        console.log(xhr.responseText);
-    };
-    // /NG -> cors()の設定をしないので、アクセスが許可されない。
-    //xhr.open( 'POST', 'http://localhost:3006/NG', false );
-    // POST 送信の場合は Content-Type は固定.
-    xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-    //xhr.setRequestHeader( 'Content-Type', 'application/xml' );
+    function okClickEvent() {
+        console.log('okClickEvent');
+        let xhr = new XMLHttpRequest();
+        xhr.open( 'POST', 'http://localhost:3006/OK', false );
+        xhr.addEventListener('load', (evt) => {
+            console.log('** xhr: load');
+        });
+        xhr.addEventListener('error', (evt) => {
+            console.log('** xhr: error');
+        });
+        xhr.send();
+    }
 
-    //
-    xhr.send( 'hoge=piyo&moge=fuga' );
-    xhr.abort(); // 再利用する際にも abort() しないと再利用できないらしい.
+    function ngClickEvent() {
+        console.log('ngClickEvent');
+        let xhr = new XMLHttpRequest();
+        xhr.open( 'POST', 'http://localhost:3006/NG', false );
+        xhr.addEventListener('load', (evt) => {
+            console.log('** xhr: load');
+        });
+        xhr.addEventListener('error', (evt) => {
+            console.log('** xhr: error');
+        });
+        // POST 送信の場合は Content-Type は固定.
+        xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+        xhr.send();
+    }
 </script>
 </html>
