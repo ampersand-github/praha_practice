@@ -12,6 +12,11 @@ const corsOptions = {
 app.post('/OK', cors(corsOptions),function(req, res, next) {
     console.log('http://localhost:3006/okへアクセス')
     console.log(req.headers);
+    res.cookie('3rdPartyCookie', 'aaa',{
+        sameSite:'none',
+        secure: true,
+        httpOnly: true
+    })
     res.send('aaaa')
     res.status(200).end();
 });

@@ -5,13 +5,14 @@
 // これが別オリジンのサーバーの代わり
 // ngrokでngrok http 3005して、得たドメイン名を使う。
 
-const express = require('express');
+const express = require("express");
 const app = express();
 
 
-app.use(express.static(__dirname, {
+app.use(express.static('anotherServer/5', {
     setHeaders: function (res) {
-        res.cookie('3rdPartyCookie', 'aaa')
+        console.log('cookie')
+        res.setHeader('set-cookie', '3rd=party; Secure; SameSite=None; HttpOnly')
     }
 }));
 

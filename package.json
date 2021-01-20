@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -14,5 +15,18 @@
     "express-cache-controller": "^1.1.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
-  }
+  },
+  "description": "// git remote add origin git@github.com:ampersand-github/praha_practice // git push -u origin mian",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ampersand-github/praha_practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ampersand-github/praha_practice/issues"
+  },
+  "homepage": "https://github.com/ampersand-github/praha_practice#readme"
 }
