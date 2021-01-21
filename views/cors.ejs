@@ -21,41 +21,78 @@
     <p>その理由を説明してください</p>
 </section>
 <section>
-    <form action="http://localhost:3006/OK" method="post" target="_blank">
-    <button type="submit" onclick="okClickEvent()">OK</button>
-    </form>
-    <form action="http://localhost:3006/NG" method="post" target="_blank">
-        <button type="submit" onclick="ngClickEvent()">NG</button>
-    </form>
+    <button type="submit" onclick="simpleClickEvent()">simple</button>
+    <button type="submit" onclick="preflightClickEvent()">preflight</button>
+
 </section>
 </body>
 <script>
-    function okClickEvent() {
-        console.log('okClickEvent');
+    const url = 'http://51e7c2e1c581.ngrok.io'
+    function simpleClickEvent() {
+        console.log('simpleClickEvent');
         let xhr = new XMLHttpRequest();
-        xhr.open( 'POST', 'http://localhost:3006/OK', false );
-        xhr.addEventListener('load', (evt) => {
-            console.log('** xhr: load');
-        });
-        xhr.addEventListener('error', (evt) => {
-            console.log('** xhr: error');
-        });
+        xhr.onreadystatechange = function() {
+            switch ( xhr.readyState ) {
+                case 0:
+                    // 未初期化状態.
+                    console.log( 'uninitialized!' );
+                    break;
+                case 1: // データ送信中.
+                    console.log( 'loading...' );
+                    break;
+                case 2: // 応答待ち.
+                    console.log( 'loaded.' );
+                    break;
+                case 3: // データ受信中.
+                    console.log( 'interactive... '+xhr.responseText.length+' bytes.' );
+                    break;
+                case 4: // データ受信完了.
+                    if( xhr.status == 200 || xhr.status == 304 ) {
+                        var data = xhr.responseText; // responseXML もあり
+                        console.log( 'COMPLETE! :'+data );
+                    } else {
+                        console.log( 'Failed. HttpStatus: '+xhr.statusText );
+                    }
+                    break;
+            }
+        };
+        xhr.open( 'POST', url + '/simple', false );
         xhr.send();
     }
 
-    function ngClickEvent() {
-        console.log('ngClickEvent');
+    function preflightClickEvent() {
+        console.log('preflightClickEvent');
         let xhr = new XMLHttpRequest();
-        xhr.open( 'POST', 'http://localhost:3006/NG', false );
-        xhr.addEventListener('load', (evt) => {
-            console.log('** xhr: load');
-        });
-        xhr.addEventListener('error', (evt) => {
-            console.log('** xhr: error');
-        });
-        // POST 送信の場合は Content-Type は固定.
-        xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+        xhr.onreadystatechange = function() {
+            switch ( xhr.readyState ) {
+                case 0:
+                    // 未初期化状態.
+                    console.log( 'uninitialized!' );
+                    break;
+                case 1: // データ送信中.
+                    console.log( 'loading...' );
+                    break;
+                case 2: // 応答待ち.
+                    console.log( 'loaded.' );
+                    break;
+                case 3: // データ受信中.
+                    console.log( 'interactive... '+xhr.responseText.length+' bytes.' );
+                    break;
+                case 4: // データ受信完了.
+                    if( xhr.status == 200 || xhr.status == 304 ) {
+                        var data = xhr.responseText; // responseXML もあり
+                        console.log( 'COMPLETE! :'+data );
+                    } else {
+                        console.log( 'Failed. HttpStatus: '+xhr.statusText );
+                    }
+                    break;
+            }
+        };
+        xhr.open( 'POST', url + '/preflight' );
+        xhr.setRequestHeader( 'Content-Type', 'application/xml' );
         xhr.send();
     }
+
+
 </script>
 </html>

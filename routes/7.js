@@ -1,10 +1,36 @@
+
+var path = require('path');
 var express = require('express');
 var router = express.Router();
 
 
-// http://localhost:3000/7/dog
+// http://localhost:3000/7/himawari
+// http://localhost:3000/7/himawari.jpg
 // http://localhost:3000/images/dog.jpg
-router.get('/dog', function(req, res, next) {
+
+
+
+
+/*
+// router.disable('etag');
+router.use(express.static('public/images/7', {
+    etag: false,
+    maxAge:31557600000,
+ /*
+    setHeaders: (res, path, stat) => {
+        res.setHeader('Cache-Control', 'public, max-age=3600')
+        res.removeHeader('ETag');
+        res.header('Cache-Control', ['private', 'no-store', 'no-cache', 'must-revalidate', 'proxy-revalidate'].join(','));
+        res.header('no-cache', 'Set-Cookie');    },
+
+
+}))
+ */
+
+
+router.use(express.static('public/images/7'));
+
+router.get('/himawari', function(req, res, next) {
     console.log('7')
     console.log(__dirname);
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -14,13 +40,14 @@ router.get('/dog', function(req, res, next) {
 
 });
 
-router.get('/dog2', function(req, res, next) {
+router.get('/azisai', function(req, res, next) {
     console.log('7')
     console.log(__dirname);
-    res.cacheControll = {
-        maxAge: 60 * 60 * 24 * 14 // キャッシュの有効期限を秒数で指定
-    }
-    res.send('<img src="/images/dog.jpg" alt="dog">').cacheControl;
+    res.cacheControl = {
+        maxAge: 15552000,
+        public:true
+    };
+    res.send('<img src="azisai.jpg" alt="azisai">');
 
 });
 

@@ -1,42 +1,35 @@
 // node ./anotherServer/6/app.js
-
-const cors = require('cors')
+// ngrok http 3066
 const express = require('express');
 const app = express();
+// https://s8a.jp/node-js-express-http-options#http%E3%81%AEoptions%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A8%E3%81%AF
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200
-}
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+    //res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Max-Age', '1');
+    next()
+});
 
-app.post('/OK', cors(corsOptions),function(req, res, next) {
-    console.log('http://localhost:3006/okへアクセス')
-    console.log(req.headers);
-    res.cookie('3rdPartyCookie', 'aaa',{
-        sameSite:'none',
-        secure: true,
-        httpOnly: true
-    })
-    res.send('aaaa')
+app.options('*', function (req, res) {
+    console.log('options')
+    res.sendStatus(200);
+});
+
+
+app.post('/simple',function(req, res, next) {
+    console.log('simpleへアクセス')
+    res.send('simpleへアクセス成功')
     res.status(200).end();
 });
 
-app.post('/NG',function(req, res, next) {
-    console.log('http://localhost:3006/ngへアクセス')
-    console.log(req.headers);
+app.post('/preflight',function(req, res, next) {
+    console.log('preflightへアクセス')
+    res.send('preflightへアクセス成功')
     res.status(200).end();
 });
 
 
-app.post('/post', function(req, res, next) {
-    console.log('別サーバー');
-    console.log(req.body);
-    const obj = {
-        message: 'Hello from server!'
-    };
-    res.send(obj);
-    res.status(200);
-
-});
-
-app.listen(3006, () => console.log('Listeninig on port 3006...'));
+app.listen(3066, () => console.log('Listeninig on port 3066...'));

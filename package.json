@@ -13,12 +13,16 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-cache-controller": "^1.1.0",
+    "express-cache-middleware": "^1.0.1",
     "http-errors": "~1.6.3",
+    "lru-cache": "^6.0.0",
     "morgan": "~1.9.1"
   },
   "description": "// git remote add origin git@github.com:ampersand-github/praha_practice // git push -u origin mian",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "cache-manager": "^3.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ampersand-github/praha_practice.git"
