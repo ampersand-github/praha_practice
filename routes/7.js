@@ -3,8 +3,8 @@ var router = express.Router();
 
 
 
-// http://localhost:3000/7/azisai.jpg
-// http://localhost:3000/7/himawari.jpg
+// http://localhost:3000/7/azisai.jpg キャッシュなし
+// http://localhost:3000/7/himawari.jpg キャッシュあり
 
 
 router.use(express.static('public/images/7/useCache', {

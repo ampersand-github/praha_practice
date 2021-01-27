@@ -4,7 +4,7 @@
 
 // これが別オリジンのサーバーの代わり
 // ngrokでngrok http 3005して、得たドメイン名を使う。
-
+// ngrok http 3005
 const express = require("express");
 const app = express();
 
